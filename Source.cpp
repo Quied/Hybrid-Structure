@@ -1,7 +1,7 @@
 #include "Header.h"
 #include <iostream>
 #include <typeinfo>
-
+#include <vector>
 
 int main() {
 
@@ -16,9 +16,13 @@ int main() {
 	Hybrid.push_front(Hybrid, 17);
 
 	Hybrid.print();
-
 	std::cout << Hybrid; std::cout << std::endl;
 
-	
+	std::vector<void*>Vec;
+	Vec.push_back(&Hybrid);
 
+	if (typeid(Hybrid) == typeid(double)) {
+		std::cout << static_cast<Hyb<double>*>(Vec[0])->Data;
+	}
+	
 }

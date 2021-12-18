@@ -69,8 +69,13 @@ public:
 		else { FIRST = el; LAST = el; }
 	}
 
-	void implace() { }
-	void insert() { }
+	void emplace() { }
+	void pop_front(){ }
+	void pop_back(){ }
+
+	void insert(Hyb node, const D data) {
+	
+	}
 
 	int size(Hyb* node) {
 		int sizes = 0;
