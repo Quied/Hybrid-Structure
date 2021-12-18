@@ -12,11 +12,12 @@ public:
 
 	Hyb() {}
 	Hyb(D _Data) : Data(_Data), Next(nullptr), FIRST(nullptr), LAST(nullptr) {}
-	~Hyb() { delete Next; }
-
+	
 
 	friend std::ostream& operator<< (std::ostream& out, const Hyb & node) {
-		out << "Data: " << node.Data;
+		out << "Begin: " << _TYPEINFO_(node).FIRST->Data; std::cout << std::endl;
+		out << "Last: " << _TYPEINFO_(node).LAST->Data; std::cout << std::endl;
+		out << "Type: " << typeid(node).name();
 		return out;
 	}
 
@@ -25,7 +26,7 @@ public:
 	Hyb* FIRST = nullptr;
 	Hyb* LAST = nullptr;
 
-	void add(Hyb node, const double data) {
+	void add(Hyb node, const D data) {
 		Hyb* el = new Hyb(data);
 		if (FIRST == NULL) {
 			FIRST = el;
@@ -35,7 +36,7 @@ public:
 		LAST = el;}
 	}
 
-	void sort(Hyb **node) {
+	void sort(Hyb *node) {
 		assert(typeid(FIRST->Data) == typeid(int));
 		for (int j = 0; j < size((*node)); j++) {
 			(*node) = FIRST;
@@ -56,11 +57,18 @@ public:
 	    OUT = OUT->Next;
 		}	std::cout << std::endl; }
 
-	void push_back(Hyb* node, const double data) { 
-	
+	void push_back(Hyb node, const D data) { 
+		Hyb* el = new Hyb(data);
+		if (LAST != nullptr) { LAST->Next = el; LAST = el; }
+		else { LAST = el; FIRST = el; }
 	}
 
-	void push_front() { }
+	void push_front(Hyb node, const D data) { 
+		Hyb* el = new Hyb(data);
+		if (FIRST != nullptr) { el->Next = FIRST; FIRST = el; }
+		else { FIRST = el; LAST = el; }
+	}
+
 	void implace() { }
 	void insert() { }
 
