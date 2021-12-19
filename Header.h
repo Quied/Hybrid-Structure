@@ -36,18 +36,14 @@ public:
 		LAST = el;}
 	}
 
-	void sort(Hyb *node) {
-		assert(typeid(FIRST->Data) == typeid(int));
-		for (int j = 0; j < size((*node)); j++) {
-			(*node) = FIRST;
-			for (int i = 0; i < size((*node)); i++) {
-
-				if ((*node)->Data > (*node)->Next->Data) { std::swap((*node)->Data, (*node)->Next->Data); }
-
-				(*node) = (*node)->Next;
+	void sort() {
+		for (int j = 0; j < size(); j++) {
+			Hyb* el = FIRST;
+			for (int i = 0; i < size(); i++) {
+				if (el->Next->Data < el->Data) { std::swap(el->Next->Data, el->Data); }
+				el = el->Next;
 			}
 		}
-
 	}
 
 	void print() {
@@ -69,19 +65,32 @@ public:
 		else { FIRST = el; LAST = el; }
 	}
 
-	void emplace() { }
-	void pop_front(){ }
-	void pop_back(){ }
+	void pop_front(Hyb node){
+		Hyb* el = FIRST;
+		FIRST = FIRST->Next;
+		delete el;
 
-	void insert(Hyb node, const D data) {
-	
 	}
 
-	int size(Hyb* node) {
-		int sizes = 0;
-		while (node->Next != nullptr) {
+
+	void pop_back(){ }
+	void emplace() { }
+	void push_front(Hyb node, const D data, int Amount) { }
+	void push_back(Hyb node, const D data, int Amount) { }
+
+
+	void insert(Hyb node, const D data) {
+		Hyb* el = new Hyb(data);
+		Hyb* In = FIRST;
+		for (int i = 0; i < size() / 2; i++) In = In->Next;
+		Hyb* Save = In;
+	}
+
+	int size() {
+		int sizes = 0; Hyb* el = FIRST;
+		while (el->Next != nullptr) {
 			sizes++;
-			node = node->Next;
+			el = el->Next;
 		}
 		return sizes;
 	}
